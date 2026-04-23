@@ -47,7 +47,7 @@
     </style>
 </head>
 <body>
-    <h1>🧮 Mehmood Calculator 👑</h1>
+    <h1>🧮syed Mehmood Calculator 👑</h1>
     <div class="calc">
         <input type="text" id="result" disabled>
         <br>
