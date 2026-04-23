@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculator - Syed Mehmood</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { 
+            background: #1a1a1a; 
+            color: white; 
+            text-align: center; 
+            font-family: Arial; 
+            padding: 50px;
+        }
+        .calc {
+            background: #333;
+            padding: 20px;
+            border-radius: 15px;
+            display: inline-block;
+        }
+        input {
+            width: 200px;
+            height: 40px;
+            font-size: 20px;
+            margin: 10px;
+            text-align: right;
+            border-radius: 5px;
+            border: none;
+        }
+        button {
+            width: 45px;
+            height: 45px;
+            margin: 5px;
+            font-size: 18px;
+            background: #FFD700;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        button:active { background: #FFA500; }
+    </style>
+</head>
+<body>
+    <h1>🧮 میرا Calculator</h1>
+    <div class="calc">
+        <input type="text" id="result" readonly><br>
+        <button onclick="clearResult()">C</button>
+        <button onclick="addValue('7')">7</button>
+        <button onclick="addValue('8')">8</button>
+        <button onclick="addValue('9')">9</button><br>
+        <button onclick="addValue('4')">4</button>
+        <button onclick="addValue('5')">5</button>
+        <button onclick="addValue('6')">6</button>
+        <button onclick="addValue('+')">+</button><br>
+        <button onclick="addValue('1')">1</button>
+        <button onclick="addValue('2')">2</button>
+        <button onclick="addValue('3')">3</button>
+        <button onclick="addValue('-')">-</button><br>
+        <button onclick="addValue('0')">0</button>
+        <button onclick="addValue('*')">×</button>
+        <button onclick="addValue('/')">÷</button>
+        <button onclick="calculate()">=</button>
+    </div>
+    <br><br>
+    <a href="index.html" style="color:#FFD700; text-decoration:none; font-size:18px;">🏠 واپس Home پر جاؤ</a>
+
+    <script>
+        function addValue(val) {
+            document.getElementById('result').value += val;
+        }
+        function calculate() {
+            let result = eval(document.getElementById('result').value);
+            document.getElementById('result').value = result;
+        }
+        function clearResult() {
+            document.getElementById('result').value = '';
+        }
+    </script>
+</body>
+</html>
