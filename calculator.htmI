@@ -1,78 +1,102 @@
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Calculator - Syed Mehmood</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { 
-            background: #1a1a1a; 
-            color: white; 
-            text-align: center; 
-            font-family: Arial; 
-            padding: 50px;
+        body {
+            background: #1a1a1a;
+            color: white;
+            text-align: center;
+            font-family: Arial;
+            padding: 20px;
         }
+        h1 { color: #4CAF50; }
         .calc {
             background: #333;
             padding: 20px;
             border-radius: 15px;
             display: inline-block;
+            margin-top: 20px;
         }
         input {
-            width: 200px;
-            height: 40px;
-            font-size: 20px;
-            margin: 10px;
+            width: 250px;
+            height: 50px;
+            font-size: 24px;
             text-align: right;
-            border-radius: 5px;
+            margin-bottom: 10px;
             border: none;
+            border-radius: 8px;
+            padding: 10px;
         }
         button {
-            width: 45px;
-            height: 45px;
+            width: 60px;
+            height: 60px;
+            font-size: 20px;
             margin: 5px;
-            font-size: 18px;
-            background: #FFD700;
             border: none;
-            border-radius: 5px;
-            font-weight: bold;
+            border-radius: 8px;
+            background: #555;
+            color: white;
+            cursor: pointer;
         }
-        button:active { background: #FFA500; }
+        button:hover { background: #666; }
+        .equal { background: #4CAF50; width: 130px; }
+        .clear { background: #f44336; }
     </style>
 </head>
 <body>
-    <h1>🧮 میرا Calculator</h1>
+    <h1>🧮 Mehmood Calculator 👑</h1>
     <div class="calc">
-        <input type="text" id="result" readonly><br>
-        <button onclick="clearResult()">C</button>
-        <button onclick="addValue('7')">7</button>
-        <button onclick="addValue('8')">8</button>
-        <button onclick="addValue('9')">9</button><br>
-        <button onclick="addValue('4')">4</button>
-        <button onclick="addValue('5')">5</button>
-        <button onclick="addValue('6')">6</button>
-        <button onclick="addValue('+')">+</button><br>
-        <button onclick="addValue('1')">1</button>
-        <button onclick="addValue('2')">2</button>
-        <button onclick="addValue('3')">3</button>
-        <button onclick="addValue('-')">-</button><br>
-        <button onclick="addValue('0')">0</button>
-        <button onclick="addValue('*')">×</button>
-        <button onclick="addValue('/')">÷</button>
-        <button onclick="calculate()">=</button>
+        <input type="text" id="result" disabled>
+        <br>
+        <button class="clear" onclick="clearScreen()">C</button>
+        <button onclick="display('/')">/</button>
+        <button onclick="display('*')">*</button>
+        <button onclick="del()">⌫</button>
+        <br>
+        <button onclick="display('7')">7</button>
+        <button onclick="display('8')">8</button>
+        <button onclick="display('9')">9</button>
+        <button onclick="display('-')">-</button>
+        <br>
+        <button onclick="display('4')">4</button>
+        <button onclick="display('5')">5</button>
+        <button onclick="display('6')">6</button>
+        <button onclick="display('+')">+</button>
+        <br>
+        <button onclick="display('1')">1</button>
+        <button onclick="display('2')">2</button>
+        <button onclick="display('3')">3</button>
+        <button onclick="display('.')">.</button>
+        <br>
+        <button onclick="display('0')">0</button>
+        <button onclick="display('00')">00</button>
+        <button class="equal" onclick="calculate()">=</button>
     </div>
-    <br><br>
-    <a href="index.html" style="color:#FFD700; text-decoration:none; font-size:18px;">🏠 واپس Home پر جاؤ</a>
 
     <script>
-        function addValue(val) {
-            document.getElementById('result').value += val;
+        let result = document.getElementById("result");
+        
+        function display(num) {
+            result.value += num;
         }
+        
         function calculate() {
-            let result = eval(document.getElementById('result').value);
-            document.getElementById('result').value = result;
+            try {
+                result.value = eval(result.value);
+            } catch(err) {
+                alert("Galat Input");
+            }
         }
-        function clearResult() {
-            document.getElementById('result').value = '';
+        
+        function clearScreen() {
+            result.value = "";
+        }
+        
+        function del() {
+            result.value = result.value.slice(0, -1);
         }
     </script>
 </body>
