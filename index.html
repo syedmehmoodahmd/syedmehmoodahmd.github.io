@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="ur">
 <head>
@@ -103,35 +104,3 @@
         function deleteLast() {
             display.innerText = display.innerText.slice(0, -1);
             if (display.innerText === '') display.innerText = '0';
-        }
-
-        function calculate() {
-            try {
-                let expression = display.innerText.replace(/×/g, '*').replace(/÷/g, '/');
-                let result = eval(expression);
-                let historyItem = `${display.innerText} = ${result}`;
-                history.unshift(historyItem);
-                updateHistory();
-                display.innerText = result;
-            } catch {
-                display.innerText = 'Error';
-            }
-        }
-
-        function updateHistory() {
-            if (history.length === 0) {
-                historyList.innerHTML = 'ابھی کوئی حساب نہیں';
-                return;
-            }
-            historyList.innerHTML = history.slice(0, 10).map(item => 
-                `<div class="history-item">${item}</div>`
-            ).join('');
-        }
-
-        function clearHistory() {
-            history = [];
-            updateHistory();
-        }
-    </script>
-</body>
-</html>
