@@ -1,1 +1,0 @@
-# syedmehmoodahmd.github.io
