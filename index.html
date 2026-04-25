@@ -193,35 +193,66 @@
         }
 
         function toggleVoice() {
-            if (!('webkitSpeechRecognition' in window)) {
-                showToast('Voice سپورٹ نہیں ہے 😢');
-                return;
-            }
-            if (!recognition) {
-                recognition = new webkitSpeechRecognition();
-                recognition.lang = 'ur-PK';
-                recognition.continuous = false;
-                recognition.onresult = (e) => {
-                    let text = e.results[0][0].transcript;
-                    text = text.replace(/جمع/g, '+').replace(/منفی/g, '-').replace(/ضرب/g, '*').replace(/تقسیم/g, '/');
-                    text = text.replace(/پانچ/g, '5').replace(/تین/g, '3').replace(/دو/g, '2').replace(/ایک/g, '1');
-                    display.innerText = text;
-                    calculate();
-                };
-                recognition.onend = () => {
-                    isListening = false;
-                    document.getElementById('voiceBtn').classList.remove('active');
-                };
-            }
-            if (isListening) {
-                recognition.stop();
+    if (!('webkitSpeechRecognition' in window)) {
+        showToast('Voice صرف Chrome میں چلے گا');
+        return;
+    }
+    if (!recognition) {
+        recognition = new webkitSpeechRecognition();
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+        recognition.onstart = () => {
+            isListening = true;
+            document.getElementById('voiceBtn').classList.add('active');
+            showToast('بولو... Speak...');
+        };
+        recognition.onresult = (e) => {
+            let text = e.results[0][0].transcript.toLowerCase();
+            text = text.replace(/جمع|plus|add/gi, '+')
+                   .replace(/منفی|minus|subtract/gi, '-')
+                   .replace(/ضرب|times|multiply|into/gi, '*')
+                   .replace(/تقسیم|divided by|divide/gi, '/')
+                   .replace(/پانچ|five/gi, '5')
+                   .replace(/تین|three/gi, '3')
+                   .replace(/دو|two/gi, '2')
+                   .replace(/ایک|one/gi, '1')
+                   .replace(/چار|four/gi, '4')
+                   .replace(/چھ|six/gi, '6')
+                   .replace(/سات|seven/gi, '7')
+                   .replace(/آٹھ|eight/gi, '8')
+                   .replace(/نو|nine/gi, '9')
+                   .replace(/صفر|zero/gi, '0');
+            display.innerText = text;
+            calculate();
+            showToast('سمجھ گیا: ' + text);
+        };
+        recognition.onerror = (e) => {
+            if(e.error === 'not-allowed') {
+                showToast('Mic Permission دو Chrome Settings سے');
             } else {
-                recognition.start();
-                isListening = true;
-                document.getElementById('voiceBtn').classList.add('active');
-                showToast('بولو... 🎤');
+                showToast('Error: ' + e.error);
             }
+            isListening = false;
+            document.getElementById('voiceBtn').classList.remove('active');
+        };
+        recognition.onend = () => {
+            isListening = false;
+            document.getElementById('voiceBtn').classList.remove('active');
+        };
+    }
+    if (isListening) {
+        recognition.stop();
+    } else {
+        recognition.lang = 'ur-PK';
+        try {
+            recognition.start();
+        } catch(err) {
+            recognition.lang = 'en-US';
+            recognition.start();
         }
+    }
+}
 
         async function convertCurrency(toCurr) {
             try {
