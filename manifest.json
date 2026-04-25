@@ -1,0 +1,16 @@
+{
+  "name": "محمود کا کیلکولیٹر Pro Max",
+  "short_name": "محمود Calc",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#1e1e1e",
+  "theme_color": "#667eea",
+  "description": "محمود بھائی کا Scientific Calculator with History",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/891/891175.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
