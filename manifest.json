@@ -1,14 +1,19 @@
 {
-  "name": "محمود کا کیلکولیٹر Pro Max",
-  "short_name": "محمود Calc",
+  "name": "Remote Scientific Calculator by Mahmood",
+  "short_name": "RemoteCalc",
   "start_url": ".",
   "display": "standalone",
-  "background_color": "#1e1e1e",
-  "theme_color": "#667eea",
-  "description": "محمود بھائی کا Scientific Calculator with History",
+  "background_color": "#1e3c72",
+  "theme_color": "#2a5298",
+  "description": "Professional Scientific Calculator by Syed Mahmood Ahmad",
   "icons": [
     {
-      "src": "https://cdn-icons-png.flaticon.com/512/891/891175.png",
+      "src": "https://cdn-icons-png.flaticon.com/512/2374/2374370.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2374/2374370.png",
       "sizes": "512x512",
       "type": "image/png"
     }
