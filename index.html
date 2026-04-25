@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+      <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -30,9 +31,6 @@
        .operator {background: rgba(255,165,0,0.6);}
        .equals {background: rgba(0,200,83,0.6); grid-column: span 2;}
        .clear {background: rgba(255,0,0,0.6);}
-       .voice {background: rgba(33,150,243,0.6);}
-       .voice.active {background: rgba(255,0,0,0.8); animation: pulse 1s infinite;}
-        @keyframes pulse {0% {opacity: 1;} 50% {opacity: 0.5;} 100% {opacity: 1;}}
        .memory {background: rgba(156,39,176,0.6);}
        .toast {
             position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
@@ -75,7 +73,6 @@
             <button onclick="appendNumber('.')">.</button>
             <button class="operator" onclick="appendOperator('+')">+</button>
 
-            <button class="voice" id="voiceBtn" onclick="toggleVoice()">🎤 Voice</button>
             <button class="equals" onclick="calculate()">=</button>
         </div>
     </div>
@@ -86,8 +83,6 @@
         let currentInput = '0';
         let shouldResetDisplay = false;
         let memory = 0;
-        let recognition = null;
-        let isListening = false;
 
         function updateDisplay() {
             display.innerText = currentInput;
@@ -173,69 +168,6 @@
             setTimeout(() => toast.classList.remove('show'), 2000);
         }
 
-        function toggleVoice() {
-            if (!('webkitSpeechRecognition' in window)) {
-                showToast('Voice صرف Chrome میں چلے گا');
-                return;
-            }
-            if (!recognition) {
-                recognition = new webkitSpeechRecognition();
-                recognition.continuous = false;
-                recognition.interimResults = false;
-                recognition.maxAlternatives = 1;
-                recognition.onstart = () => {
-                    isListening = true;
-                    document.getElementById('voiceBtn').classList.add('active');
-                    showToast('بولو... Speak...');
-                };
-                recognition.onresult = (e) => {
-                    let text = e.results[0][0].transcript.toLowerCase();
-                    text = text.replace(/جمع|plus|add/gi, '+')
-                          .replace(/منفی|minus|subtract/gi, '-')
-                          .replace(/ضرب|times|multiply|into/gi, '*')
-                          .replace(/تقسیم|divided by|divide/gi, '/')
-                          .replace(/پانچ|five/gi, '5')
-                          .replace(/تین|three/gi, '3')
-                          .replace(/دو|two/gi, '2')
-                          .replace(/ایک|one/gi, '1')
-                          .replace(/چار|four/gi, '4')
-                          .replace(/چھ|six/gi, '6')
-                          .replace(/سات|seven/gi, '7')
-                          .replace(/آٹھ|eight/gi, '8')
-                          .replace(/نو|nine/gi, '9')
-                          .replace(/صفر|zero/gi, '0');
-                    currentInput = text;
-                    updateDisplay();
-                    calculate();
-                    showToast('سمجھ گیا: ' + text);
-                };
-                recognition.onerror = (e) => {
-                    if(e.error === 'not-allowed') {
-                        showToast('Mic Permission دو Chrome Settings سے');
-                    } else {
-                        showToast('Error: ' + e.error);
-                    }
-                    isListening = false;
-                    document.getElementById('voiceBtn').classList.remove('active');
-                };
-                recognition.onend = () => {
-                    isListening = false;
-                    document.getElementById('voiceBtn').classList.remove('active');
-                };
-            }
-            if (isListening) {
-                recognition.stop();
-            } else {
-                recognition.lang = 'ur-PK';
-                try {
-                    recognition.start();
-                } catch(err) {
-                    recognition.lang = 'en-US';
-                    recognition.start();
-                }
-            }
-        }
-
         document.addEventListener('keydown', (e) => {
             if (e.key >= '0' && e.key <= '9') appendNumber(e.key);
             if (e.key === '.') appendNumber('.');
@@ -248,4 +180,4 @@
         updateMemoryIndicator();
     </script>
 </body>
-</html>
+</html>  
