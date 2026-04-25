@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>محمود کا کیلکولیٹر Pro Max Ultra</title>
+    <title>محمود کا کیلکولیٹر Ultra</title>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#667eea">
     <style>
@@ -27,67 +27,67 @@
             min-height: 100vh; display: flex; align-items: center; justify-content: center;
             padding: 15px; gap: 15px; flex-wrap: wrap; transition: 0.3s;
         }
-      .calculator {
+       .calculator {
             background: var(--calc-bg); border-radius: 20px; padding: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3); width: 360px; transition: 0.3s;
         }
-      .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 6px; }
-      .title { color: var(--text); font-size: 14px; }
-      .btn-group { display: flex; gap: 5px; flex-wrap: wrap; }
-      .theme-btn,.sci-btn,.voice-btn,.curr-btn {
+       .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 6px; }
+       .title { color: var(--text); font-size: 14px; }
+       .btn-group { display: flex; gap: 5px; flex-wrap: wrap; }
+       .theme-btn,.sci-btn,.voice-btn,.curr-btn {
             background: var(--btn-num); color: var(--text); border: none;
             border-radius: 8px; padding: 5px 8px; cursor: pointer; font-size: 12px;
         }
-      .voice-btn.active { background: #ff3b30; animation: pulse 1s infinite; }
+       .voice-btn.active { background: #ff3b30; animation: pulse 1s infinite; }
         @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
-      .memory-indicator {
+       .memory-indicator {
             color: #ff9500; font-size: 13px; font-weight: bold;
             min-height: 18px; text-align: left; padding-left: 10px;
         }
-      .display-wrapper { position: relative; margin-bottom: 8px; }
-      .display {
+       .display-wrapper { position: relative; margin-bottom: 8px; }
+       .display {
             background: var(--display-bg); color: var(--text); font-size: 2rem; text-align: right;
             padding: 15px 50px 15px 15px; border-radius: 10px;
             min-height: 70px; word-wrap: break-word; transition: 0.3s;
         }
-      .copy-btn {
+       .copy-btn {
             position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
             background: #007AFF; color: white; border: none; border-radius: 6px;
             padding: 8px 10px; cursor: pointer; font-size: 14px;
         }
-      .memory-buttons,.sci-buttons,.currency-buttons {
+       .memory-buttons,.sci-buttons,.currency-buttons {
             display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 6px;
         }
-      .sci-buttons,.currency-buttons { display: none; }
-      .sci-buttons.active,.currency-buttons.active { display: grid; }
-      .buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+       .sci-buttons,.currency-buttons { display: none; }
+       .sci-buttons.active,.currency-buttons.active { display: grid; }
+       .buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
         button {
             border: none; border-radius: 8px; font-size: 1.1rem; padding: 14px;
             cursor: pointer; transition: 0.2s;
         }
         button:active { transform: scale(0.95); }
-      .btn-number { background: var(--btn-num); color: var(--text); }
-      .btn-operator { background: #ff9500; color: white; }
-      .btn-clear { background: #a5a5a5; color: black; }
-      .btn-sci { background: #007AFF; color: white; font-size: 0.9rem; }
-      .btn-memory { background: #5856d6; color: white; font-size: 0.9rem; }
-      .btn-curr { background: #34c759; color: white; font-size: 0.9rem; }
-      .btn-equals { background: #ff9500; color: white; grid-column: span 2; }
-      .history {
+       .btn-number { background: var(--btn-num); color: var(--text); }
+       .btn-operator { background: #ff9500; color: white; }
+       .btn-clear { background: #a5a5a5; color: black; }
+       .btn-sci { background: #007AFF; color: white; font-size: 0.9rem; }
+       .btn-memory { background: #5856d6; color: white; font-size: 0.9rem; }
+       .btn-curr { background: #34c759; color: white; font-size: 0.9rem; }
+       .btn-equals { background: #ff9500; color: white; grid-column: span 2; }
+       .history {
             background: var(--calc-bg); border-radius: 20px; padding: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3); width: 360px; max-height: 500px; transition: 0.3s;
         }
-      .history-title { color: var(--text); text-align: center; margin-bottom: 12px; font-size: 16px; }
-      .history-list {
+       .history-title { color: var(--text); text-align: center; margin-bottom: 12px; font-size: 16px; }
+       .history-list {
             background: var(--display-bg); border-radius: 10px; padding: 12px;
             max-height: 400px; overflow-y: auto; color: var(--text); transition: 0.3s;
         }
-      .history-item { padding: 6px 0; border-bottom: 1px solid #444; font-size: 13px; }
-      .clear-history {
+       .history-item { padding: 6px 0; border-bottom: 1px solid #444; font-size: 13px; }
+       .clear-history {
             width: 100%; margin-top: 8px; background: #ff3b30; color: white;
             padding: 8px; border-radius: 8px; font-size: 0.9rem;
         }
-      .toast {
+       .toast {
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
             background: #34c759; color: white; padding: 12px 20px; border-radius: 8px;
             display: none; z-index: 1000;
@@ -104,6 +104,7 @@
                 <button class="voice-btn" id="voiceBtn" onclick="toggleVoice()">🎤 Voice</button>
                 <button class="theme-btn" onclick="toggleTheme()">☀️</button>
             </div>
+        </div>
         <div class="memory-indicator" id="memoryIndicator"></div>
         <div class="display-wrapper">
             <div class="display" id="display">0</div>
@@ -152,6 +153,7 @@
             <button class="btn-number" onclick="appendToDisplay('.')">.</button>
             <button class="btn-equals" onclick="calculate()">=</button>
         </div>
+    </div>
     <div class="history">
         <div class="history-title">History 📝</div>
         <div class="history-list" id="historyList">ابھی کوئی حساب نہیں</div>
@@ -169,7 +171,178 @@
         let memory = 0;
         let recognition;
         let isListening = false;
+
         document.addEventListener('keydown', (e) => {
             if (e.key >= '0' && e.key <= '9') appendToDisplay(e.key);
             if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/' || e.key === '%' || e.key === '.') appendToDisplay(e.key);
-            if (e.key === 'Enter' || e.key === '=') calculate
+            if (e.key === 'Enter' || e.key === '=') calculate();
+            if (e.key === 'Backspace') deleteLast();
+            if (e.key === 'Escape' || e.key.toLowerCase() === 'c') clearDisplay();
+            if (e.key === '(' || e.key === ')') appendToDisplay(e.key);
+        });
+
+        function copyResult() {
+            navigator.clipboard.writeText(display.innerText);
+            showToast('Copy ہو گیا 📋');
+        }
+
+        function showToast(msg) {
+            toast.innerText = msg;
+            toast.style.display = 'block';
+            setTimeout(() => toast.style.display = 'none', 2000);
+        }
+
+        function toggleVoice() {
+            if (!('webkitSpeechRecognition' in window)) {
+                showToast('Voice سپورٹ نہیں ہے 😢');
+                return;
+            }
+            if (!recognition) {
+                recognition = new webkitSpeechRecognition();
+                recognition.lang = 'ur-PK';
+                recognition.continuous = false;
+                recognition.onresult = (e) => {
+                    let text = e.results[0][0].transcript;
+                    text = text.replace(/جمع/g, '+').replace(/منفی/g, '-').replace(/ضرب/g, '*').replace(/تقسیم/g, '/');
+                    text = text.replace(/پانچ/g, '5').replace(/تین/g, '3').replace(/دو/g, '2').replace(/ایک/g, '1');
+                    display.innerText = text;
+                    calculate();
+                };
+                recognition.onend = () => {
+                    isListening = false;
+                    document.getElementById('voiceBtn').classList.remove('active');
+                };
+            }
+            if (isListening) {
+                recognition.stop();
+            } else {
+                recognition.start();
+                isListening = true;
+                document.getElementById('voiceBtn').classList.add('active');
+                showToast('بولو... 🎤');
+            }
+        }
+
+        async function convertCurrency(toCurr) {
+            try {
+                let amount = parseFloat(display.innerText);
+                if (isNaN(amount)) return showToast('پہلے رقم لکھو');
+                showToast('ریٹ نکال رہا ہوں...');
+                let res = await fetch(`https://api.exchangerate-api.com/v4/latest/PKR`);
+                let data = await res.json();
+                let rate = data.rates[toCurr];
+                let result = (amount * rate).toFixed(2);
+                let historyItem = `${amount} PKR = ${result} ${toCurr}`;
+                history.unshift(historyItem);
+                updateHistory();
+                display.innerText = result;
+                showToast(`${amount} PKR = ${result} ${toCurr}`);
+            } catch {
+                showToast('Net Error 😢');
+            }
+        }
+
+        function toggleCurrency() {
+            currMode =!currMode;
+            sciMode = false;
+            document.getElementById('sciButtons').classList.remove('active');
+            document.getElementById('currButtons').classList.toggle('active');
+        }
+
+        function updateMemoryIndicator() {
+            memoryIndicator.innerText = memory!== 0? 'M: ' + memory : '';
+        }
+
+        function memoryAdd() {
+            memory += parseFloat(display.innerText) || 0;
+            updateMemoryIndicator();
+            showToast('M+ ہو گیا');
+        }
+
+        function memorySubtract() {
+            memory -= parseFloat(display.innerText) || 0;
+            updateMemoryIndicator();
+            showToast('M- ہو گیا');
+        }
+
+        function memoryRecall() {
+            display.innerText = memory;
+        }
+
+        function memoryClear() {
+            memory = 0;
+            updateMemoryIndicator();
+            showToast('Memory صاف');
+        }
+
+        function toggleTheme() {
+            let body = document.body;
+            let btn = document.querySelector('.theme-btn');
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.setAttribute('data-theme', 'light');
+                btn.innerHTML = '🌙';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                btn.innerHTML = '☀️';
+            }
+        }
+
+        function toggleScientific() {
+            sciMode =!sciMode;
+            currMode = false;
+            document.getElementById('currButtons').classList.remove('active');
+            document.getElementById('sciButtons').classList.toggle('active');
+            document.querySelector('.sci-btn').innerHTML = sciMode? '🔢 Basic' : '🔬 Sci';
+        }
+
+        function appendToDisplay(value) {
+            if (display.innerText === '0' || display.innerText === 'Error') {
+                display.innerText = value;
+            } else {
+                display.innerText += value;
+            }
+        }
+
+        function clearDisplay() {
+            display.innerText = '0';
+        }
+
+        function deleteLast() {
+            display.innerText = display.innerText.slice(0, -1);
+            if (display.innerText === '') display.innerText = '0';
+        }
+
+        function calculate() {
+            try {
+                let expression = display.innerText.replace(/×/g, '*').replace(/÷/g, '/');
+                let result = eval(expression);
+                let historyItem = `${display.innerText} = ${result}`;
+                history.unshift(historyItem);
+                updateHistory();
+                display.innerText = result;
+            } catch {
+                display.innerText = 'Error';
+            }
+        }
+
+        function updateHistory() {
+            if (history.length === 0) {
+                historyList.innerHTML = 'ابھی کوئی حساب نہیں';
+                return;
+            }
+            historyList.innerHTML = history.slice(0, 10).map(item =>
+                `<div class="history-item">${item}</div>`
+            ).join('');
+        }
+
+        function clearHistory() {
+            history = [];
+            updateHistory();
+        }
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./service-worker.js');
+        }
+    </script>
+</body>
+</html>
