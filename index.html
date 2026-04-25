@@ -1,116 +1,137 @@
+
 <!DOCTYPE html>
 <html lang="ur">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>محمود کا کیلکولیٹر</title>
+    <title>محمود کا کیلکولیٹر Pro</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
         body {
-            font-family: 'Segoe UI', Tahoma, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
+            min-height: 100vh; display: flex; align-items: center; justify-content: center;
+            padding: 20px; gap: 20px; flex-wrap: wrap;
         }
         .calculator {
-            background: #1e1e1e;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-            width: 100%;
-            max-width: 350px;
+            background: #1e1e1e; border-radius: 20px; padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); width: 320px;
         }
+        .title { color: white; text-align: center; margin-bottom: 15px; font-size: 18px; }
         .display {
-            background: #2d2d2d;
-            color: #fff;
-            font-size: 2.5rem;
-            padding: 20px;
-            text-align: right;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            min-height: 80px;
-            word-wrap: break-word;
-            word-break: break-all;
+            background: #2d2d2d; color: white; font-size: 2.5rem; text-align: right;
+            padding: 20px; border-radius: 10px; margin-bottom: 20px;
+            min-height: 80px; word-wrap: break-word;
         }
         .buttons {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
         }
         button {
-            padding: 25px;
-            font-size: 1.5rem;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            background: #3d3d3d;
-            color: #fff;
-            transition: all 0.2s;
+            border: none; border-radius: 10px; font-size: 1.5rem; padding: 20px;
+            cursor: pointer; transition: 0.2s;
         }
-        button:active {
-            transform: scale(0.95);
+        button:active { transform: scale(0.95); }
+        .btn-number { background: #4a4a4a; color: white; }
+        .btn-operator { background: #ff9500; color: white; }
+        .btn-clear { background: #a5a5a5; color: black; }
+        .btn-equals { background: #ff9500; color: white; grid-column: span 2; }
+        .history {
+            background: #1e1e1e; border-radius: 20px; padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); width: 320px; max-height: 500px;
         }
-        button:hover {
-            background: #4d4d4d;
+        .history-title { color: white; text-align: center; margin-bottom: 15px; font-size: 18px; }
+        .history-list {
+            background: #2d2d2d; border-radius: 10px; padding: 15px;
+            max-height: 400px; overflow-y: auto; color: #ccc;
         }
-        .operator {
-            background: #ff9500;
-        }
-        .operator:hover {
-            background: #ffad33;
-        }
-        .equals {
-            background: #ff9500;
-            grid-column: span 2;
-        }
-        .clear {
-            background: #a5a5a5;
-            color: #000;
-        }
-        .clear:hover {
-            background: #d4d4d4;
-        }
-        .zero {
-            grid-column: span 2;
-        }
-        h1 {
-            color: #fff;
-            text-align: center;
-            margin-bottom: 15px;
-            font-size: 1.2rem;
+        .history-item { padding: 8px 0; border-bottom: 1px solid #444; }
+        .clear-history {
+            width: 100%; margin-top: 10px; background: #ff3b30; color: white;
+            padding: 10px; border-radius: 8px; font-size: 1rem;
         }
     </style>
 </head>
 <body>
     <div class="calculator">
-        <h1>محمود کا کیلکولیٹر 🧮</h1>
+        <div class="title">محمود کا کیلکولیٹر Pro 🧮</div>
         <div class="display" id="display">0</div>
         <div class="buttons">
-            <button class="clear" onclick="clearDisplay()">C</button>
-            <button class="clear" onclick="deleteLast()">⌫</button>
-            <button class="operator" onclick="appendOperator('%')">%</button>
-            <button class="operator" onclick="appendOperator('/')">÷</button>
-            
-            <button onclick="appendNumber('7')">7</button>
-            <button onclick="appendNumber('8')">8</button>
-            <button onclick="appendNumber('9')">9</button>
-            <button class="operator" onclick="appendOperator('*')">×</button>
-            
-            <button onclick="appendNumber('4')">4</button>
-            <button onclick="appendNumber('5')">5</button>
-            <button onclick="appendNumber('6')">6</button>
-            <button class="operator" onclick="appendOperator('-')">−</button>
-            
-            <button onclick="appendNumber('1')">1</button>
-            <button onclick="appendNumber('2')">2</button>
-            <button onclick="appendNumber('3')">3</button>
-            <button class="operator" onclick="appendOperator('+')">+</button>
-            
-            <button class="zero" onclick
+            <button class="btn-clear" onclick="clearDisplay()">C</button>
+            <button class="btn-clear" onclick="deleteLast()">⌫</button>
+            <button class="btn-operator" onclick="appendToDisplay('%')">%</button>
+            <button class="btn-operator" onclick="appendToDisplay('/')">÷</button>
+            <button class="btn-number" onclick="appendToDisplay('7')">7</button>
+            <button class="btn-number" onclick="appendToDisplay('8')">8</button>
+            <button class="btn-number" onclick="appendToDisplay('9')">9</button>
+            <button class="btn-operator" onclick="appendToDisplay('*')">×</button>
+            <button class="btn-number" onclick="appendToDisplay('4')">4</button>
+            <button class="btn-number" onclick="appendToDisplay('5')">5</button>
+            <button class="btn-number" onclick="appendToDisplay('6')">6</button>
+            <button class="btn-operator" onclick="appendToDisplay('-')">-</button>
+            <button class="btn-number" onclick="appendToDisplay('1')">1</button>
+            <button class="btn-number" onclick="appendToDisplay('2')">2</button>
+            <button class="btn-number" onclick="appendToDisplay('3')">3</button>
+            <button class="btn-operator" onclick="appendToDisplay('+')">+</button>
+            <button class="btn-number" onclick="appendToDisplay('0')">0</button>
+            <button class="btn-number" onclick="appendToDisplay('.')">.</button>
+            <button class="btn-equals" onclick="calculate()">=</button>
+        </div>
+    </div>
+
+    <div class="history">
+        <div class="history-title">History 📝</div>
+        <div class="history-list" id="historyList">ابھی کوئی حساب نہیں</div>
+        <button class="clear-history" onclick="clearHistory()">History صاف کرو</button>
+    </div>
+
+    <script>
+        let display = document.getElementById('display');
+        let historyList = document.getElementById('historyList');
+        let history = [];
+
+        function appendToDisplay(value) {
+            if (display.innerText === '0' && value !== '.') {
+                display.innerText = value;
+            } else {
+                display.innerText += value;
+            }
+        }
+
+        function clearDisplay() {
+            display.innerText = '0';
+        }
+
+        function deleteLast() {
+            display.innerText = display.innerText.slice(0, -1);
+            if (display.innerText === '') display.innerText = '0';
+        }
+
+        function calculate() {
+            try {
+                let expression = display.innerText.replace(/×/g, '*').replace(/÷/g, '/');
+                let result = eval(expression);
+                let historyItem = `${display.innerText} = ${result}`;
+                history.unshift(historyItem);
+                updateHistory();
+                display.innerText = result;
+            } catch {
+                display.innerText = 'Error';
+            }
+        }
+
+        function updateHistory() {
+            if (history.length === 0) {
+                historyList.innerHTML = 'ابھی کوئی حساب نہیں';
+                return;
+            }
+            historyList.innerHTML = history.slice(0, 10).map(item => 
+                `<div class="history-item">${item}</div>`
+            ).join('');
+        }
+
+        function clearHistory() {
+            history = [];
+            updateHistory();
+        }
+    </script>
+</body>
+</html>
