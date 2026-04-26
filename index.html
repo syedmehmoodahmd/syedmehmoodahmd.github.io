@@ -1,183 +1,125 @@
 
-      <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Syed Mahmood Calculator</title>
+    <title>Scientific Calculator</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2a5298">
     <style>
-        * {margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif;}
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
         }
-       .calculator {
-            background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);
-            border-radius: 20px; padding: 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,255,255,0.2); width: 100%; max-width: 350px;
+        .calculator {
+            background: #222;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            width: 100%;
+            max-width: 400px;
         }
-       .display {
-            background: rgba(0,0,0,0.3); color: white; font-size: 2.5rem; padding: 20px;
-            text-align: right; border-radius: 10px; margin-bottom: 20px; min-height: 80px;
-            word-wrap: break-word; word-break: break-all;
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 24px;
         }
-       .buttons {display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;}
+        #display {
+            width: 100%;
+            height: 80px;
+            background: #000;
+            color: #0f0;
+            text-align: right;
+            font-size: 2.5em;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
         button {
-            padding: 20px; font-size: 1.2rem; border: none; border-radius: 10px;
-            background: rgba(255,255,255,0.2); color: white; cursor: pointer; transition: 0.2s;
+            height: 60px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            background: #444;
+            color: white;
         }
-        button:hover {background: rgba(255,255,255,0.3); transform: scale(1.05);}
-        button:active {transform: scale(0.95);}
-       .operator {background: rgba(255,165,0,0.6);}
-       .equals {background: rgba(0,200,83,0.6); grid-column: span 2;}
-       .clear {background: rgba(255,0,0,0.6);}
-       .memory {background: rgba(156,39,176,0.6);}
-       .toast {
-            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-            background: rgba(0,0,0,0.8); color: white; padding: 12px 24px;
-            border-radius: 25px; opacity: 0; transition: 0.3s; pointer-events: none;
-        }
-       .toast.show {opacity: 1;}
-       .title {text-align: center; color: white; margin-bottom: 15px; font-size: 1.3rem; font-weight: 600;}
-       .memory-indicator {text-align: center; color: #FFD700; font-size: 0.8rem; height: 15px; margin-bottom: 5px;}
+        button:active { transform: scale(0.95); }
+        .operator { background: #ff9500; }
+        .clear { background: #a5a5a5; color: black; }
+        .equals { background: #ff9500; grid-column: span 2; }
     </style>
 </head>
 <body>
     <div class="calculator">
-        <div class="title">Syed Mahmood Calculator</div>
-        <div class="memory-indicator" id="memoryIndicator"></div>
-        <div class="display" id="display">0</div>
+        <h1>Scientific Calculator 🧮</h1>
+        <input type="text" id="display" disabled value="0">
         <div class="buttons">
             <button class="clear" onclick="clearDisplay()">C</button>
-            <button class="memory" onclick="memoryClear()">MC</button>
-            <button class="memory" onclick="memoryRecall()">MR</button>
-            <button class="operator" onclick="appendOperator('/')">/</button>
-
-            <button class="memory" onclick="memoryAdd()">M+</button>
-            <button onclick="appendNumber('7')">7</button>
-            <button onclick="appendNumber('8')">8</button>
-            <button onclick="appendNumber('9')">9</button>
-
-            <button class="memory" onclick="memorySubtract()">M-</button>
-            <button onclick="appendNumber('4')">4</button>
-            <button onclick="appendNumber('5')">5</button>
-            <button onclick="appendNumber('6')">6</button>
-
-            <button class="operator" onclick="appendOperator('*')">×</button>
-            <button onclick="appendNumber('1')">1</button>
-            <button onclick="appendNumber('2')">2</button>
-            <button onclick="appendNumber('3')">3</button>
-
-            <button class="operator" onclick="appendOperator('-')">-</button>
-            <button onclick="appendNumber('0')">0</button>
-            <button onclick="appendNumber('.')">.</button>
-            <button class="operator" onclick="appendOperator('+')">+</button>
-
+            <button onclick="deleteLast()">⌫</button>
+            <button class="operator" onclick="append('%')">%</button>
+            <button class="operator" onclick="append('/')">÷</button>
+            
+            <button onclick="append('7')">7</button>
+            <button onclick="append('8')">8</button>
+            <button onclick="append('9')">9</button>
+            <button class="operator" onclick="append('*')">×</button>
+            
+            <button onclick="append('4')">4</button>
+            <button onclick="append('5')">5</button>
+            <button onclick="append('6')">6</button>
+            <button class="operator" onclick="append('-')">-</button>
+            
+            <button onclick="append('1')">1</button>
+            <button onclick="append('2')">2</button>
+            <button onclick="append('3')">3</button>
+            <button class="operator" onclick="append('+')">+</button>
+            
+            <button onclick="append('0')">0</button>
+            <button onclick="append('.')">.</button>
             <button class="equals" onclick="calculate()">=</button>
         </div>
     </div>
-    <div class="toast" id="toast"></div>
 
     <script>
         let display = document.getElementById('display');
-        let currentInput = '0';
-        let shouldResetDisplay = false;
-        let memory = 0;
-
-        function updateDisplay() {
-            display.innerText = currentInput;
+        
+        function append(value) {
+            if (display.value === '0') display.value = '';
+            display.value += value;
         }
-
-        function updateMemoryIndicator() {
-            document.getElementById('memoryIndicator').innerText = memory!== 0? 'M' : '';
-        }
-
-        function appendNumber(num) {
-            if (currentInput === '0' || shouldResetDisplay) {
-                currentInput = num;
-                shouldResetDisplay = false;
-            } else {
-                currentInput += num;
-            }
-            updateDisplay();
-        }
-
-        function appendOperator(op) {
-            if (shouldResetDisplay) shouldResetDisplay = false;
-            currentInput += op;
-            updateDisplay();
-        }
-
+        
         function clearDisplay() {
-            currentInput = '0';
-            updateDisplay();
+            display.value = '0';
         }
-
+        
+        function deleteLast() {
+            display.value = display.value.slice(0, -1);
+            if (display.value === '') display.value = '0';
+        }
+        
         function calculate() {
             try {
-                let result = eval(currentInput.replace(/×/g, '*'));
-                currentInput = String(result);
-                shouldResetDisplay = true;
-                updateDisplay();
-            } catch (e) {
-                currentInput = 'Error';
-                shouldResetDisplay = true;
-                updateDisplay();
-                setTimeout(clearDisplay, 1500);
+                display.value = eval(display.value);
+            } catch {
+                display.value = 'Error';
             }
         }
-
-        function memoryClear() {
-            memory = 0;
-            updateMemoryIndicator();
-            showToast('Memory Cleared');
-        }
-
-        function memoryRecall() {
-            currentInput = String(memory);
-            shouldResetDisplay = true;
-            updateDisplay();
-        }
-
-        function memoryAdd() {
-            try {
-                memory += parseFloat(eval(currentInput)) || 0;
-                updateMemoryIndicator();
-                showToast('Added to Memory');
-                shouldResetDisplay = true;
-            } catch (e) {
-                showToast('Error');
-            }
-        }
-
-        function memorySubtract() {
-            try {
-                memory -= parseFloat(eval(currentInput)) || 0;
-                updateMemoryIndicator();
-                showToast('Subtracted from Memory');
-                shouldResetDisplay = true;
-            } catch (e) {
-                showToast('Error');
-            }
-        }
-
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            toast.innerText = msg;
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 2000);
-        }
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key >= '0' && e.key <= '9') appendNumber(e.key);
-            if (e.key === '.') appendNumber('.');
-            if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/') appendOperator(e.key);
-            if (e.key === 'Enter' || e.key === '=') calculate();
-            if (e.key === 'Escape' || e.key === 'c' || e.key === 'C') clearDisplay();
-        });
-
-        updateDisplay();
-        updateMemoryIndicator();
     </script>
 </body>
-</html>  
+</html>
